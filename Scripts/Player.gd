@@ -3,6 +3,7 @@ extends CharacterBody2D
 @onready var player = $AnimatedSprite2D
 @onready var dash_cooldown = $dash_cooldown
 @onready var dashtimer = $dashtimer
+@onready var animated_sprite = $AnimatedSprite2D
 
 const SPEED = 50.0
 const JUMP_VELOCITY = -200.0
@@ -45,7 +46,14 @@ func _physics_process(delta):
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 
-			
+	# Animations
+	if is_on_floor():
+		if direction == 0:
+			animated_sprite.play("idle")
+		else:
+			animated_sprite.play("run")
+	else:
+		animated_sprite.play("jump")
 
 	move_and_slide()
 

@@ -1,7 +1,9 @@
-[gd_scene load_steps=12 format=3 uid="uid://bwfyepb4327hl"]
+[gd_scene load_steps=16 format=3 uid="uid://bwfyepb4327hl"]
 
 [ext_resource type="Script" path="res://Scripts/Player.gd" id="1_fml8g"]
 [ext_resource type="Texture2D" uid="uid://bvlselfrm73v0" path="res://Assets/crab/Idle_spritesheet.png" id="2_uo22p"]
+[ext_resource type="PackedScene" uid="uid://cwu5jorjtuluk" path="res://scenes/ParticleEffects/bubble.tscn" id="3_0pc5g"]
+[ext_resource type="Texture2D" uid="uid://ccx2gmyyvj2rq" path="res://Assets/crab/Jump_spritesheet.png" id="3_qxr0g"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xrnju"]
 atlas = ExtResource("2_uo22p")
@@ -35,6 +37,14 @@ region = Rect2(0, 68, 34, 34)
 atlas = ExtResource("2_uo22p")
 region = Rect2(34, 68, 34, 34)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_4ycxy"]
+atlas = ExtResource("3_qxr0g")
+region = Rect2(34, 0, 34, 34)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pytmp"]
+atlas = ExtResource("3_qxr0g")
+region = Rect2(0, 0, 34, 34)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_odsu2"]
 animations = [{
 "frames": [{
@@ -63,8 +73,19 @@ animations = [{
 "texture": SubResource("AtlasTexture_hiu02")
 }],
 "loop": true,
-"name": &"Idle",
-"speed": 7.0
+"name": &"idle",
+"speed": 3.5
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4ycxy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pytmp")
+}],
+"loop": true,
+"name": &"jump",
+"speed": 4.0
 }]
 
 [node name="Player" type="CharacterBody2D"]
@@ -73,8 +94,8 @@ script = ExtResource("1_fml8g")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -3)
 sprite_frames = SubResource("SpriteFrames_odsu2")
-animation = &"Idle"
-autoplay = "Idle"
+animation = &"jump"
+autoplay = "idle"
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 position = Vector2(0, 10)
@@ -87,6 +108,8 @@ wait_time = 0.1
 
 [node name="dash_cooldown" type="Timer" parent="."]
 wait_time = 3.0
+
+[node name="Bubble" parent="." instance=ExtResource("3_0pc5g")]
 
 [connection signal="timeout" from="dashtimer" to="." method="_on_dashtimer_timeout"]
 [connection signal="timeout" from="dash_cooldown" to="." method="_on_dash_cooldown_timeout"]

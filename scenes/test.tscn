@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://bct6brg7attka"]
 
-[ext_resource type="PackedScene" uid="uid://bwfyepb4327hl" path="res://scenes/deleteme.tscn" id="1_b5x2n"]
+[ext_resource type="PackedScene" uid="uid://bwfyepb4327hl" path="res://scenes/player.tscn" id="1_b5x2n"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_k5nup"]
 distance = -14.0
@@ -10,12 +10,12 @@ distance = -14.0
 [node name="Player" parent="." instance=ExtResource("1_b5x2n")]
 position = Vector2(427, 291)
 
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(433, 288)
+zoom = Vector2(5, 5)
+
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2(456, 288)
 shape = SubResource("WorldBoundaryShape2D_k5nup")
-
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(433, 288)
-zoom = Vector2(10, 10)

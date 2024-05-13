@@ -1,8 +1,12 @@
 extends GPUParticles2D
 
 @onready var gpu_particles_2d = $"."
+@onready var bubble_timer = $"../BubbleTimer"
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if Input.is_action_just_pressed("super_jump"):
-		gpu_particles_2d.emitting = not gpu_particles_2d.emitting
+	if Input.is_action_just_pressed("super_jump") and bubble_timer.is_stopped():
+		gpu_particles_2d.emitting = true
+		bubble_timer.start()
+
+func _on_bubble_timer_timeout():
+	gpu_particles_2d.emitting = false

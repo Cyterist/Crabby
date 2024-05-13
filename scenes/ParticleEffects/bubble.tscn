@@ -28,3 +28,9 @@ amount = 200
 process_material = SubResource("ParticleProcessMaterial_2c8hu")
 lifetime = 0.05
 script = ExtResource("1_fp0nj")
+
+[node name="BubbleTimer" type="Timer" parent="."]
+wait_time = 0.4
+one_shot = true
+
+[connection signal="timeout" from="BubbleTimer" to="GPUParticles2D" method="_on_bubble_timer_timeout"]
