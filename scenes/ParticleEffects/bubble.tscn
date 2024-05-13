@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://cwu5jorjtuluk"]
+
+[ext_resource type="Script" path="res://Scripts/Bubble.gd" id="1_fp0nj"]
+
+[sub_resource type="Gradient" id="Gradient_wavxm"]
+colors = PackedColorArray(0, 0.564706, 0.713726, 1, 0.254902, 0.823529, 0.784314, 0.952941)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_r8fje"]
+gradient = SubResource("Gradient_wavxm")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_2c8hu"]
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 20.0
+emission_ring_radius = 20.0
+emission_ring_inner_radius = 20.0
+direction = Vector3(0, 0, 0)
+orbit_velocity_min = 2.0
+orbit_velocity_max = 2.0
+gravity = Vector3(0, 0, 0)
+color_ramp = SubResource("GradientTexture1D_r8fje")
+
+[node name="Bubble" type="Node2D"]
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 200
+process_material = SubResource("ParticleProcessMaterial_2c8hu")
+lifetime = 0.05
+script = ExtResource("1_fp0nj")
