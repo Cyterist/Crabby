@@ -5,7 +5,7 @@ extends CharacterBody2D
 @onready var dash_duration = %dash_duration
 @onready var animated_sprite = $AnimatedSprite2D
 @onready var dash_cooldown = %dash_cooldown
-
+@onready var coyote_timer = $CoyoteTimer
 
 const SPEED = 200.0
 const JUMP_VELOCITY = -500.0
@@ -16,10 +16,8 @@ const DASH_COOLDOWN = 3
 var dash = false
 var can_dash = true
  
-
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
-
 
 func _physics_process(delta):
 	# Add the gravity.
@@ -34,8 +32,10 @@ func _physics_process(delta):
 			dash_cooldown.visible = true
 			dash_cooldown.start_cooldown(DASH_COOLDOWN)
 
-	# Handle jump.
+	# Handle jump and super jump.
 	if Input.is_action_just_pressed("jump") and is_on_floor():
+		velocity.y = JUMP_VELOCITY
+	elif not coyote_timer.is_stopped() and Input.is_action_just_pressed("jump"):
 		velocity.y = JUMP_VELOCITY
 	if Input.is_action_just_pressed("super_jump") and is_on_floor():
 		velocity.y = SUPER_JUMP_VELOCITY
@@ -50,6 +50,12 @@ func _physics_process(delta):
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 
+		# Flip the sprite
+	if direction > 0:
+		animated_sprite.flip_h = false
+	elif direction < 0:
+		animated_sprite.flip_h = true
+
 	# Animations
 	if is_on_floor():
 		if direction == 0:
@@ -58,9 +64,14 @@ func _physics_process(delta):
 			animated_sprite.play("run")
 	else:
 		animated_sprite.play("jump")
+		
+	# Coyote Time
+	var was_on_floor = is_on_floor()
 
 	move_and_slide()
 	
+	if was_on_floor and not is_on_floor() and not Input.is_action_just_pressed("jump"):
+		coyote_timer.start()
 
 func _on_dash_duration_timeout():
 	dash = false
@@ -69,4 +80,10 @@ func _on_dash_cooldown_timer_timeout():
 	can_dash = true
 	dash_cooldown.visible = false
 	dash_cooldown.reset()
+
+
+
+
+
+
 

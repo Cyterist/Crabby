@@ -1,9 +1,10 @@
-[gd_scene load_steps=19 format=3 uid="uid://bwfyepb4327hl"]
+[gd_scene load_steps=22 format=3 uid="uid://bwfyepb4327hl"]
 
 [ext_resource type="Script" path="res://Scripts/Player.gd" id="1_fml8g"]
 [ext_resource type="Texture2D" uid="uid://bvlselfrm73v0" path="res://Assets/crab/Idle_spritesheet.png" id="2_uo22p"]
 [ext_resource type="PackedScene" uid="uid://cwu5jorjtuluk" path="res://scenes/ParticleEffects/bubble.tscn" id="3_0pc5g"]
 [ext_resource type="Texture2D" uid="uid://ccx2gmyyvj2rq" path="res://Assets/crab/Jump_spritesheet.png" id="3_qxr0g"]
+[ext_resource type="Texture2D" uid="uid://8lmap54dhrxf" path="res://Assets/crab/Run_spritesheet.png" id="5_5obmc"]
 [ext_resource type="PackedScene" uid="uid://cswnmf8y14eyf" path="res://scenes/cooldown.tscn" id="5_e0q1u"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xrnju"]
@@ -42,12 +43,20 @@ region = Rect2(34, 68, 34, 34)
 atlas = ExtResource("3_qxr0g")
 region = Rect2(34, 0, 34, 34)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_bndmn"]
-atlas = ExtResource("2_uo22p")
-region = Rect2(68, 0, 34, 34)
+[sub_resource type="AtlasTexture" id="AtlasTexture_s1x48"]
+atlas = ExtResource("5_5obmc")
+region = Rect2(0, 0, 34, 34)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_cigcy"]
-atlas = ExtResource("2_uo22p")
+[sub_resource type="AtlasTexture" id="AtlasTexture_sj74p"]
+atlas = ExtResource("5_5obmc")
+region = Rect2(34, 0, 34, 34)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fr3lh"]
+atlas = ExtResource("5_5obmc")
+region = Rect2(0, 34, 34, 34)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h7cqx"]
+atlas = ExtResource("5_5obmc")
 region = Rect2(34, 34, 34, 34)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_odsu2"]
@@ -91,10 +100,16 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_bndmn")
+"texture": SubResource("AtlasTexture_s1x48")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_cigcy")
+"texture": SubResource("AtlasTexture_sj74p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fr3lh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h7cqx")
 }],
 "loop": true,
 "name": &"run",
@@ -124,9 +139,9 @@ position_smoothing_enabled = true
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -16)
 sprite_frames = SubResource("SpriteFrames_odsu2")
-animation = &"idle"
+animation = &"run"
 autoplay = "idle"
-frame_progress = 0.800959
+frame_progress = 0.263949
 
 [node name="Box Collision" type="CollisionShape2D" parent="."]
 position = Vector2(0, -14.5)
@@ -145,6 +160,10 @@ wait_time = 3.0
 [node name="Particle Effects" type="Node" parent="."]
 
 [node name="Bubble" parent="Particle Effects" instance=ExtResource("3_0pc5g")]
+
+[node name="CoyoteTimer" type="Timer" parent="."]
+wait_time = 0.15
+one_shot = true
 
 [connection signal="timeout" from="Timers/dash_duration" to="." method="_on_dash_duration_timeout"]
 [connection signal="timeout" from="Timers/dash_cooldown_timer" to="." method="_on_dash_cooldown_timer_timeout"]
