@@ -8,6 +8,7 @@ const SPEED = 20
 var player = null
 var chasing = false
 var dir = 0
+var health = 50
 
 
 
@@ -41,3 +42,6 @@ func _on_aggro_range_body_exited(body):
 	chasing = false
 	
 	path_timer.stop()
+
+func take_damage():
+	print("damaged")

@@ -5,7 +5,8 @@ extends CharacterBody2D
 @onready var dash_duration = %dash_duration
 @onready var animated_sprite = $AnimatedSprite2D
 @onready var dash_cooldown = %dash_cooldown
-@onready var coyote_timer = $CoyoteTimer
+@onready var coyote_timer = %CoyoteTimer
+@onready var attack_collision = $attack/CollisionShape2D
 
 const SPEED = 200.0
 const JUMP_VELOCITY = -500.0
@@ -15,6 +16,7 @@ const DASH_COOLDOWN = 3
 
 var dash = false
 var can_dash = true
+var attacking = false
  
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -31,6 +33,11 @@ func _physics_process(delta):
 			dash_cooldown_timer.start()
 			dash_cooldown.visible = true
 			dash_cooldown.start_cooldown(DASH_COOLDOWN)
+	
+	# Handle Attacking
+	if Input.is_action_just_pressed("attack"):
+		attacking = true
+		attack_collision.disabled = false
 
 	# Handle jump and super jump.
 	if Input.is_action_just_pressed("jump") and is_on_floor():
@@ -51,21 +58,26 @@ func _physics_process(delta):
 	# super jump
 	if Input.is_action_just_pressed("super_jump") and is_on_floor() and direction == 0:
 		velocity.y = SUPER_JUMP_VELOCITY
-
+	
 		# Flip the sprite
 	if direction > 0:
 		animated_sprite.flip_h = false
+		get_node("attack").set_scale(Vector2(1, 1))
 	elif direction < 0:
 		animated_sprite.flip_h = true
+		get_node("attack").set_scale(Vector2(-1, 1))
 
 	# Animations
-	if is_on_floor():
-		if direction == 0:
-			animated_sprite.play("idle")
+	if not attacking:
+		if is_on_floor():
+			if direction == 0:
+				animated_sprite.play("idle")
+			else:
+				animated_sprite.play("run")
 		else:
-			animated_sprite.play("run")
+			animated_sprite.play("jump")
 	else:
-		animated_sprite.play("jump")
+		animated_sprite.play("Attack")
 		
 	# Coyote Time
 	var was_on_floor = is_on_floor()
@@ -84,4 +96,12 @@ func _on_dash_cooldown_timer_timeout():
 	dash_cooldown.visible = false
 	dash_cooldown.reset()
 
+func _on_animated_sprite_2d_animation_finished():
+	if animated_sprite.animation == "Attack":
+		attack_collision.disabled = true
+		attacking = false
 
+
+func _on_attack_body_entered(body):
+	if body.has_method("take_damage"):
+		body.take_damage()

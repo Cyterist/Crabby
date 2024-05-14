@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://bwfyepb4327hl"]
+[gd_scene load_steps=26 format=3 uid="uid://bwfyepb4327hl"]
 
 [ext_resource type="Script" path="res://Scripts/Player.gd" id="1_fml8g"]
 [ext_resource type="Texture2D" uid="uid://bvlselfrm73v0" path="res://Assets/crab/Idle_spritesheet.png" id="2_uo22p"]
@@ -6,6 +6,18 @@
 [ext_resource type="Texture2D" uid="uid://ccx2gmyyvj2rq" path="res://Assets/crab/Jump_spritesheet.png" id="3_qxr0g"]
 [ext_resource type="Texture2D" uid="uid://8lmap54dhrxf" path="res://Assets/crab/Run_spritesheet.png" id="5_5obmc"]
 [ext_resource type="PackedScene" uid="uid://cswnmf8y14eyf" path="res://scenes/cooldown.tscn" id="5_e0q1u"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_30xuy"]
+atlas = ExtResource("2_uo22p")
+region = Rect2(34, 34, 34, 34)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qwx0a"]
+atlas = ExtResource("3_qxr0g")
+region = Rect2(34, 0, 34, 34)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_56adr"]
+atlas = ExtResource("2_uo22p")
+region = Rect2(34, 0, 34, 34)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xrnju"]
 atlas = ExtResource("2_uo22p")
@@ -61,6 +73,20 @@ region = Rect2(34, 34, 34, 34)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_odsu2"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_30xuy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qwx0a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_56adr")
+}],
+"loop": false,
+"name": &"Attack",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_xrnju")
@@ -119,6 +145,9 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_supgs"]
 size = Vector2(28.6847, 28.3727)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bu5km"]
+size = Vector2(12.1542, 20)
+
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 2
 script = ExtResource("1_fml8g")
@@ -139,9 +168,8 @@ position_smoothing_enabled = true
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -16)
 sprite_frames = SubResource("SpriteFrames_odsu2")
-animation = &"run"
+animation = &"Attack"
 autoplay = "idle"
-frame_progress = 0.263949
 
 [node name="Box Collision" type="CollisionShape2D" parent="."]
 position = Vector2(-0.315808, -14.8286)
@@ -157,11 +185,24 @@ wait_time = 0.1
 unique_name_in_owner = true
 wait_time = 3.0
 
-[node name="CoyoteTimer" type="Timer" parent="."]
+[node name="CoyoteTimer" type="Timer" parent="Timers"]
+unique_name_in_owner = true
 wait_time = 0.15
 one_shot = true
 
 [node name="Bubble" parent="." instance=ExtResource("3_0pc5g")]
 
+[node name="attack" type="Area2D" parent="."]
+position = Vector2(0, -16)
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="attack"]
+position = Vector2(26.2811, 1.29783)
+shape = SubResource("RectangleShape2D_bu5km")
+disabled = true
+debug_color = Color(1.05888e-06, 0.635485, 0.416626, 0.42)
+
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="timeout" from="Timers/dash_duration" to="." method="_on_dash_duration_timeout"]
 [connection signal="timeout" from="Timers/dash_cooldown_timer" to="." method="_on_dash_cooldown_timer_timeout"]
+[connection signal="body_entered" from="attack" to="." method="_on_attack_body_entered"]
