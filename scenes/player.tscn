@@ -117,10 +117,10 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_supgs"]
-size = Vector2(30, 29)
+size = Vector2(28.6847, 28.3727)
 
 [node name="Player" type="CharacterBody2D"]
-collision_mask = 6
+collision_layer = 2
 script = ExtResource("1_fml8g")
 
 [node name="dash_cooldown" parent="." instance=ExtResource("5_e0q1u")]
@@ -144,7 +144,7 @@ autoplay = "idle"
 frame_progress = 0.263949
 
 [node name="Box Collision" type="CollisionShape2D" parent="."]
-position = Vector2(0, -14.5)
+position = Vector2(-0.315808, -14.8286)
 shape = SubResource("RectangleShape2D_supgs")
 
 [node name="Timers" type="Node" parent="."]
