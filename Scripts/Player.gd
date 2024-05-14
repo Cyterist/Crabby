@@ -1,14 +1,19 @@
 extends CharacterBody2D
 
 @onready var player = $AnimatedSprite2D
-@onready var dash_cooldown = $dash_cooldown
-@onready var dashtimer = $dashtimer
+@onready var dash_cooldown = %dash_cooldown
+@onready var dashtimer = %dashtimer
 @onready var animated_sprite = $AnimatedSprite2D
+@onready var dashcooldowntimer = $dashcooldown
+@onready var dashcooldown = $dash_cooldown
+
+
 
 const SPEED = 50.0
 const JUMP_VELOCITY = -200.0
 const SUPER_JUMP_VELOCITY = -300.0
 const DASH_SPEED = 400
+const DASH_COOLDOWN = 3
 
 var dash = false
 var can_dash = true
@@ -28,6 +33,8 @@ func _physics_process(delta):
 			can_dash = false
 			dashtimer.start()
 			dash_cooldown.start()
+			dashcooldown.visible = true
+			dashcooldown.start_cooldown(DASH_COOLDOWN)
 
 	# Handle jump.
 	if Input.is_action_just_pressed("jump") and is_on_floor():
@@ -56,10 +63,12 @@ func _physics_process(delta):
 		animated_sprite.play("jump")
 
 	move_and_slide()
-
+	
 
 func _on_dash_cooldown_timeout():
 	can_dash = true
+	dashcooldown.visible = false
+	dashcooldown.reset()
 
 
 func _on_dashtimer_timeout():

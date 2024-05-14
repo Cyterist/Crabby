@@ -1,0 +1,35 @@
+[gd_scene load_steps=3 format=3 uid="uid://b3rj8cwn0ikk3"]
+
+[ext_resource type="PackedScene" uid="uid://bwfyepb4327hl" path="res://scenes/player.tscn" id="1_fgpa2"]
+[ext_resource type="Script" path="res://Scripts/game.gd" id="1_xg3m1"]
+
+[node name="Game" type="Node2D"]
+script = ExtResource("1_xg3m1")
+
+[node name="Player" parent="." instance=ExtResource("1_fgpa2")]
+position = Vector2(603, 175)
+
+[node name="Pause" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="ColorRect" type="ColorRect" parent="Pause"]
+offset_right = 1152.0
+offset_bottom = 647.0
+color = Color(0, 0, 0, 0.313726)
+
+[node name="Label" type="Label" parent="Pause/ColorRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -31.0
+offset_top = -11.5
+offset_right = 31.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 72
+text = "PAUSED
+"

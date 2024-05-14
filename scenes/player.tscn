@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://bvlselfrm73v0" path="res://Assets/crab/Idle_spritesheet.png" id="2_uo22p"]
 [ext_resource type="PackedScene" uid="uid://cwu5jorjtuluk" path="res://scenes/ParticleEffects/bubble.tscn" id="3_0pc5g"]
 [ext_resource type="Texture2D" uid="uid://ccx2gmyyvj2rq" path="res://Assets/crab/Jump_spritesheet.png" id="3_qxr0g"]
+[ext_resource type="PackedScene" uid="uid://cswnmf8y14eyf" path="res://scenes/cooldown.tscn" id="5_e0q1u"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xrnju"]
 atlas = ExtResource("2_uo22p")
@@ -41,10 +42,6 @@ region = Rect2(34, 68, 34, 34)
 atlas = ExtResource("3_qxr0g")
 region = Rect2(34, 0, 34, 34)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_pytmp"]
-atlas = ExtResource("3_qxr0g")
-region = Rect2(0, 0, 34, 34)
-
 [sub_resource type="SpriteFrames" id="SpriteFrames_odsu2"]
 animations = [{
 "frames": [{
@@ -79,9 +76,6 @@ animations = [{
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_4ycxy")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_pytmp")
 }],
 "loop": true,
 "name": &"jump",
@@ -91,10 +85,20 @@ animations = [{
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_fml8g")
 
+[node name="Timers" type="Node" parent="."]
+
+[node name="dashtimer" type="Timer" parent="Timers"]
+unique_name_in_owner = true
+wait_time = 0.1
+
+[node name="dash_cooldown" type="Timer" parent="Timers"]
+unique_name_in_owner = true
+wait_time = 3.0
+
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -3)
 sprite_frames = SubResource("SpriteFrames_odsu2")
-animation = &"jump"
+animation = &"idle"
 autoplay = "idle"
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
@@ -103,13 +107,17 @@ scale = Vector2(4.44, 4.44)
 build_mode = 1
 polygon = PackedVector2Array(0.900901, -2.92793, -0.900901, -2.92793, -0.900901, -2.7027, -1.35135, -2.7027, -1.35135, -2.25225, -1.57658, -2.25225, -1.57658, -2.02703, -2.25225, -2.02703, -2.25225, -1.8018, -2.47748, -1.8018, -2.47748, -1.57658, -2.7027, -1.57658, -2.7027, -1.35135, -2.92793, -1.35135, -2.92793, -1.12613, -3.15315, -1.12613, -3.15315, -0.675676, -3.37838, -0.675676, -3.37838, -2.38419e-07, -3.15315, -2.38419e-07, -3.15315, 0.45045, -2.92793, 0.45045, -2.92793, 0.675675, -2.7027, 0.675675, -2.7027, 0.45045, -2.47748, 0.45045, -2.47748, -2.38419e-07, -2.25225, -2.38419e-07, -2.25225, 0.225225, -2.02703, 0.225225, -2.02703, 0.45045, -1.8018, 0.45045, -1.8018, 0.675675, -1.35135, 0.675675, -1.35135, 0.225225, -1.57658, 0.225225, -1.57658, -0.225225, -1.35135, -0.225225, -1.35135, -0.450451, -1.12613, -0.450451, -1.12613, -0.675676, 1.12613, -0.675676, 1.12613, -0.450451, 1.35135, -0.450451, 1.35135, -0.225225, 1.57658, -0.225225, 1.57813, 0.140625, 1.33594, 0.140625, 1.35135, 0.675675, 1.8018, 0.675675, 1.8018, 0.45045, 2.02703, 0.45045, 2.02703, 0.225225, 2.25225, 0.225225, 2.25225, -2.38419e-07, 2.47748, -2.38419e-07, 2.47748, 0.45045, 2.7027, 0.45045, 2.7027, 0.675675, 2.92793, 0.675675, 2.92793, 0.45045, 3.15315, 0.45045, 3.15315, -2.38419e-07, 3.37838, -2.38419e-07, 3.37838, -0.675676, 3.15315, -0.675676, 3.15315, -1.12613, 2.92793, -1.12613, 2.92793, -1.35135, 2.7027, -1.35135, 2.7027, -1.57658, 2.47748, -1.57658, 2.47748, -1.8018, 2.25225, -1.8018, 2.25225, -2.02703, 1.57658, -2.02703, 1.57658, -2.25225, 1.35135, -2.25225, 1.35135, -2.7027, 0.900901, -2.7027)
 
-[node name="dashtimer" type="Timer" parent="."]
-wait_time = 0.1
-
-[node name="dash_cooldown" type="Timer" parent="."]
-wait_time = 3.0
-
 [node name="Bubble" parent="." instance=ExtResource("3_0pc5g")]
 
-[connection signal="timeout" from="dashtimer" to="." method="_on_dashtimer_timeout"]
-[connection signal="timeout" from="dash_cooldown" to="." method="_on_dash_cooldown_timeout"]
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(3, 3)
+
+[node name="dash_cooldown" parent="." instance=ExtResource("5_e0q1u")]
+visible = false
+offset_left = 17.4723
+offset_top = -12.8611
+offset_right = 17.4723
+offset_bottom = -12.8611
+
+[connection signal="timeout" from="Timers/dashtimer" to="." method="_on_dashtimer_timeout"]
+[connection signal="timeout" from="Timers/dash_cooldown" to="." method="_on_dash_cooldown_timeout"]

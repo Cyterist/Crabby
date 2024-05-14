@@ -10,12 +10,14 @@ distance = -14.0
 [node name="Player" parent="." instance=ExtResource("1_b5x2n")]
 position = Vector2(427, 291)
 
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(433, 288)
-zoom = Vector2(5, 5)
-
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2(456, 288)
 shape = SubResource("WorldBoundaryShape2D_k5nup")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = 466.0
+offset_top = 270.0
+offset_right = 564.0
+offset_bottom = 297.0

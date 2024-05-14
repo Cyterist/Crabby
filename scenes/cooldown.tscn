@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://cswnmf8y14eyf"]
+
+[ext_resource type="Script" path="res://Scripts/cooldown.gd" id="1_x6nyg"]
+[ext_resource type="Texture2D" uid="uid://c0ev6lbe6cqaj" path="res://Assets/Cooldown bar/empty.png" id="2_3e5vm"]
+[ext_resource type="Texture2D" uid="uid://b4jm6yd062c5n" path="res://Assets/Cooldown bar/full.png" id="3_vfv8d"]
+
+[node name="cooldown" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.25, 0.25)
+script = ExtResource("1_x6nyg")
+
+[node name="cooldown_bar" type="TextureProgressBar" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+fill_mode = 4
+texture_under = ExtResource("2_3e5vm")
+texture_progress = ExtResource("3_vfv8d")
