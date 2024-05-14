@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://bwfyepb4327hl"]
+[gd_scene load_steps=19 format=3 uid="uid://bwfyepb4327hl"]
 
 [ext_resource type="Script" path="res://Scripts/Player.gd" id="1_fml8g"]
 [ext_resource type="Texture2D" uid="uid://bvlselfrm73v0" path="res://Assets/crab/Idle_spritesheet.png" id="2_uo22p"]
@@ -42,6 +42,14 @@ region = Rect2(34, 68, 34, 34)
 atlas = ExtResource("3_qxr0g")
 region = Rect2(34, 0, 34, 34)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_bndmn"]
+atlas = ExtResource("2_uo22p")
+region = Rect2(68, 0, 34, 34)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cigcy"]
+atlas = ExtResource("2_uo22p")
+region = Rect2(34, 34, 34, 34)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_odsu2"]
 animations = [{
 "frames": [{
@@ -80,9 +88,24 @@ animations = [{
 "loop": true,
 "name": &"jump",
 "speed": 4.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bndmn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cigcy")
+}],
+"loop": true,
+"name": &"run",
+"speed": 5.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_supgs"]
+size = Vector2(30, 29)
+
 [node name="Player" type="CharacterBody2D"]
+collision_mask = 6
 script = ExtResource("1_fml8g")
 
 [node name="Timers" type="Node" parent="."]
@@ -96,21 +119,22 @@ unique_name_in_owner = true
 wait_time = 3.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(0, -3)
+position = Vector2(0, -16)
 sprite_frames = SubResource("SpriteFrames_odsu2")
-animation = &"idle"
+animation = &"run"
 autoplay = "idle"
+frame_progress = 0.298395
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-position = Vector2(0, 10)
-scale = Vector2(4.44, 4.44)
-build_mode = 1
-polygon = PackedVector2Array(0.900901, -2.92793, -0.900901, -2.92793, -0.900901, -2.7027, -1.35135, -2.7027, -1.35135, -2.25225, -1.57658, -2.25225, -1.57658, -2.02703, -2.25225, -2.02703, -2.25225, -1.8018, -2.47748, -1.8018, -2.47748, -1.57658, -2.7027, -1.57658, -2.7027, -1.35135, -2.92793, -1.35135, -2.92793, -1.12613, -3.15315, -1.12613, -3.15315, -0.675676, -3.37838, -0.675676, -3.37838, -2.38419e-07, -3.15315, -2.38419e-07, -3.15315, 0.45045, -2.92793, 0.45045, -2.92793, 0.675675, -2.7027, 0.675675, -2.7027, 0.45045, -2.47748, 0.45045, -2.47748, -2.38419e-07, -2.25225, -2.38419e-07, -2.25225, 0.225225, -2.02703, 0.225225, -2.02703, 0.45045, -1.8018, 0.45045, -1.8018, 0.675675, -1.35135, 0.675675, -1.35135, 0.225225, -1.57658, 0.225225, -1.57658, -0.225225, -1.35135, -0.225225, -1.35135, -0.450451, -1.12613, -0.450451, -1.12613, -0.675676, 1.12613, -0.675676, 1.12613, -0.450451, 1.35135, -0.450451, 1.35135, -0.225225, 1.57658, -0.225225, 1.57813, 0.140625, 1.33594, 0.140625, 1.35135, 0.675675, 1.8018, 0.675675, 1.8018, 0.45045, 2.02703, 0.45045, 2.02703, 0.225225, 2.25225, 0.225225, 2.25225, -2.38419e-07, 2.47748, -2.38419e-07, 2.47748, 0.45045, 2.7027, 0.45045, 2.7027, 0.675675, 2.92793, 0.675675, 2.92793, 0.45045, 3.15315, 0.45045, 3.15315, -2.38419e-07, 3.37838, -2.38419e-07, 3.37838, -0.675676, 3.15315, -0.675676, 3.15315, -1.12613, 2.92793, -1.12613, 2.92793, -1.35135, 2.7027, -1.35135, 2.7027, -1.57658, 2.47748, -1.57658, 2.47748, -1.8018, 2.25225, -1.8018, 2.25225, -2.02703, 1.57658, -2.02703, 1.57658, -2.25225, 1.35135, -2.25225, 1.35135, -2.7027, 0.900901, -2.7027)
+[node name="Box Collision" type="CollisionShape2D" parent="."]
+position = Vector2(0, -14.5)
+shape = SubResource("RectangleShape2D_supgs")
 
 [node name="Bubble" parent="." instance=ExtResource("3_0pc5g")]
 
 [node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(0, -14)
 zoom = Vector2(3, 3)
+position_smoothing_enabled = true
 
 [node name="dash_cooldown" parent="." instance=ExtResource("5_e0q1u")]
 visible = false
