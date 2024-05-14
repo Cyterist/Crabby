@@ -108,15 +108,10 @@ size = Vector2(30, 29)
 collision_mask = 6
 script = ExtResource("1_fml8g")
 
-[node name="Timers" type="Node" parent="."]
-
-[node name="dashtimer" type="Timer" parent="Timers"]
-unique_name_in_owner = true
-wait_time = 0.1
-
-[node name="dash_cooldown" type="Timer" parent="Timers"]
-unique_name_in_owner = true
-wait_time = 3.0
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(0, -14)
+zoom = Vector2(2.5, 2.5)
+position_smoothing_enabled = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -16)
@@ -129,12 +124,15 @@ frame_progress = 0.298395
 position = Vector2(0, -14.5)
 shape = SubResource("RectangleShape2D_supgs")
 
-[node name="Bubble" parent="." instance=ExtResource("3_0pc5g")]
+[node name="Timers" type="Node" parent="."]
 
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(0, -14)
-zoom = Vector2(3, 3)
-position_smoothing_enabled = true
+[node name="dashtimer" type="Timer" parent="Timers"]
+unique_name_in_owner = true
+wait_time = 0.1
+
+[node name="dash_cooldown" type="Timer" parent="Timers"]
+unique_name_in_owner = true
+wait_time = 3.0
 
 [node name="dash_cooldown" parent="." instance=ExtResource("5_e0q1u")]
 visible = false
@@ -142,6 +140,10 @@ offset_left = 17.4723
 offset_top = -12.8611
 offset_right = 17.4723
 offset_bottom = -12.8611
+
+[node name="Particle Effects" type="Node" parent="."]
+
+[node name="Bubble" parent="Particle Effects" instance=ExtResource("3_0pc5g")]
 
 [connection signal="timeout" from="Timers/dashtimer" to="." method="_on_dashtimer_timeout"]
 [connection signal="timeout" from="Timers/dash_cooldown" to="." method="_on_dash_cooldown_timeout"]
