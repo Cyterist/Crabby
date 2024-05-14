@@ -5,25 +5,32 @@ extends CharacterBody2D
 
 const SPEED = 20
 
+var home_pos = Vector2.ZERO
 var player = null
 var chasing = false
-var dir = 0
 var health = 50
 
-
+func _ready():
+	home_pos = self.global_position
+	
+	nav_agent.path_desired_distance = 3
+	nav_agent.target_desired_distance = 3
 
 func _physics_process(_delta):
-	if chasing:
-		dir = to_local(nav_agent.get_next_path_position()).normalized()
-	else:
-		dir = Vector2(0,0)
+	if nav_agent.is_navigation_finished():
+		return
+	
+	var dir = to_local(nav_agent.get_next_path_position()).normalized()
 	
 	velocity = dir * SPEED
 	
 	move_and_slide()
 
 func makepath():
-	nav_agent.target_position = player.global_position
+	if player:
+		nav_agent.target_position = player.global_position
+	else:
+		nav_agent.target_position = home_pos
 	
 
 func _on_path_timer_timeout():
@@ -41,7 +48,6 @@ func _on_aggro_range_body_exited(body):
 	player = null
 	chasing = false
 	
-	path_timer.stop()
 
 func take_damage():
 	print("damaged")
