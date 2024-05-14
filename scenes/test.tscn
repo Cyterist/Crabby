@@ -662,6 +662,7 @@ offset_right = 138.0
 offset_bottom = -15.0
 
 [node name="80PointCollision" type="CollisionPolygon2D" parent="."]
+visible = false
 position = Vector2(-7.62939e-06, -134)
 scale = Vector2(4.44, 4.44)
 build_mode = 1
