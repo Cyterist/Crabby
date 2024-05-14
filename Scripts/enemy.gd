@@ -3,7 +3,7 @@ extends CharacterBody2D
 @onready var nav_agent = $NavigationAgent2D
 @onready var path_timer = $Path_timer
 
-const SPEED = 20
+const SPEED = 40
 
 var home_pos = Vector2.ZERO
 var player = null
@@ -38,16 +38,16 @@ func _on_path_timer_timeout():
 
 
 func _on_aggro_range_body_entered(body):
-	player = body
-	chasing = true
-	makepath()
-	path_timer.start()
+	if body.is_in_group("player"):
+		player = body
+		makepath()
+		path_timer.start()
 
 
 func _on_aggro_range_body_exited(body):
 	player = null
 	chasing = false
 	
-
-func take_damage():
+func take_damage(damage):
 	print("damaged")
+

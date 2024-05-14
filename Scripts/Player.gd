@@ -14,6 +14,7 @@ const SUPER_JUMP_VELOCITY = -700.0
 const DASH_SPEED = 400
 const DASH_COOLDOWN = 3
 
+var health = 100
 var dash = false
 var can_dash = true
 var attacking = false
@@ -87,7 +88,9 @@ func _physics_process(delta):
 	if was_on_floor and not is_on_floor() and not Input.is_action_just_pressed("jump"):
 		coyote_timer.start()
 
-# Timer signals
+func damage():
+	print(health)
+# Signals
 func _on_dash_duration_timeout():
 	dash = false
 
@@ -104,4 +107,5 @@ func _on_animated_sprite_2d_animation_finished():
 
 func _on_attack_body_entered(body):
 	if body.has_method("take_damage"):
-		body.take_damage()
+		body.take_damage(10)
+
