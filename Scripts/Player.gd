@@ -37,8 +37,6 @@ func _physics_process(delta):
 		velocity.y = JUMP_VELOCITY
 	elif not coyote_timer.is_stopped() and Input.is_action_just_pressed("jump"):
 		velocity.y = JUMP_VELOCITY
-	if Input.is_action_just_pressed("super_jump") and is_on_floor():
-		velocity.y = SUPER_JUMP_VELOCITY
 
 	# Movement
 	var direction = Input.get_axis("move_left", "move_right")
@@ -49,6 +47,10 @@ func _physics_process(delta):
 			velocity.x = direction * SPEED
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
+	
+	# super jump
+	if Input.is_action_just_pressed("super_jump") and is_on_floor() and direction == 0:
+		velocity.y = SUPER_JUMP_VELOCITY
 
 		# Flip the sprite
 	if direction > 0:
@@ -73,6 +75,7 @@ func _physics_process(delta):
 	if was_on_floor and not is_on_floor() and not Input.is_action_just_pressed("jump"):
 		coyote_timer.start()
 
+# Timer signals
 func _on_dash_duration_timeout():
 	dash = false
 
@@ -80,3 +83,5 @@ func _on_dash_cooldown_timer_timeout():
 	can_dash = true
 	dash_cooldown.visible = false
 	dash_cooldown.reset()
+
+

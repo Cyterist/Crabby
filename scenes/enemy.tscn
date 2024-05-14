@@ -1,10 +1,13 @@
-[gd_scene load_steps=4 format=3 uid="uid://cp5m68gtxbjdj"]
+[gd_scene load_steps=5 format=3 uid="uid://cp5m68gtxbjdj"]
 
 [ext_resource type="Script" path="res://Scripts/enemy.gd" id="1_061td"]
 [ext_resource type="Texture2D" uid="uid://cadv6emb36rmd" path="res://icon.svg" id="2_u7o1d"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_2kjny"]
 radius = 15.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3ries"]
+radius = 105.0
 
 [node name="enemy" type="CharacterBody2D"]
 collision_layer = 2
@@ -23,6 +26,15 @@ shape = SubResource("CircleShape2D_2kjny")
 debug_enabled = true
 
 [node name="Path_timer" type="Timer" parent="."]
-autostart = true
+wait_time = 0.5
+
+[node name="aggro_range" type="Area2D" parent="."]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="aggro_range"]
+shape = SubResource("CircleShape2D_3ries")
+debug_color = Color(0.995286, 0, 0.207891, 0.42)
 
 [connection signal="timeout" from="Path_timer" to="." method="_on_path_timer_timeout"]
+[connection signal="body_entered" from="aggro_range" to="." method="_on_aggro_range_body_entered"]
+[connection signal="body_exited" from="aggro_range" to="." method="_on_aggro_range_body_exited"]
