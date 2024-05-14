@@ -27,6 +27,7 @@ emitting = false
 amount = 200
 process_material = SubResource("ParticleProcessMaterial_2c8hu")
 lifetime = 0.05
+speed_scale = 1.1
 script = ExtResource("1_fp0nj")
 
 [node name="BubbleTimer" type="Timer" parent="."]

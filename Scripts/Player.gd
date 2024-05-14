@@ -80,10 +80,3 @@ func _on_dash_cooldown_timer_timeout():
 	can_dash = true
 	dash_cooldown.visible = false
 	dash_cooldown.reset()
-
-
-
-
-
-
-

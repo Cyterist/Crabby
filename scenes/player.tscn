@@ -157,13 +157,11 @@ wait_time = 0.1
 unique_name_in_owner = true
 wait_time = 3.0
 
-[node name="Particle Effects" type="Node" parent="."]
-
-[node name="Bubble" parent="Particle Effects" instance=ExtResource("3_0pc5g")]
-
 [node name="CoyoteTimer" type="Timer" parent="."]
 wait_time = 0.15
 one_shot = true
+
+[node name="Bubble" parent="." instance=ExtResource("3_0pc5g")]
 
 [connection signal="timeout" from="Timers/dash_duration" to="." method="_on_dash_duration_timeout"]
 [connection signal="timeout" from="Timers/dash_cooldown_timer" to="." method="_on_dash_cooldown_timer_timeout"]
