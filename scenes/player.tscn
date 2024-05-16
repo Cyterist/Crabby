@@ -164,8 +164,14 @@ func _process(delta):
 size = Vector2(12.1542, 20)
 
 [node name="Player" type="CharacterBody2D"]
-collision_layer = 2
+collision_layer = 10
 script = ExtResource("1_fml8g")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(1, -13)
+zoom = Vector2(2.5, 2.5)
+limit_bottom = 120
+position_smoothing_enabled = true
 
 [node name="dash_cooldown" parent="." instance=ExtResource("5_e0q1u")]
 unique_name_in_owner = true
