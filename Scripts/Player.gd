@@ -7,6 +7,7 @@ extends CharacterBody2D
 @onready var dash_cooldown = %dash_cooldown
 @onready var coyote_timer = %CoyoteTimer
 @onready var attack_collision = $attack/CollisionShape2D
+@onready var bubble = $Bubble
 
 const SPEED = 200.0
 const JUMP_VELOCITY = -500.0
@@ -56,7 +57,7 @@ func _physics_process(delta):
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 	
-	# super jump
+	
 	if Input.is_action_just_pressed("super_jump") and is_on_floor() and direction == 0:
 		velocity.y = SUPER_JUMP_VELOCITY
 	
@@ -90,6 +91,7 @@ func _physics_process(delta):
 
 func damage():
 	print(health)
+	
 # Signals
 func _on_dash_duration_timeout():
 	dash = false
