@@ -16,8 +16,6 @@ var m_CurrentRoom : Vector2 = Vector2.ZERO
 # Initialize the offset from the origin point
 var m_OriginOffset : Vector2 = Vector2.ZERO
 
-var m_RespawnPoint : Vector2 = Vector2.ZERO
-
 func _ready():
 	m_OriginOffset = TargetNode.get_position()
 	set_position(m_OriginOffset)
@@ -25,7 +23,6 @@ func _ready():
 func _UpdateCameraPosition(direction : Vector2) -> void:
 	m_CurrentRoom += direction
 	set_position(m_OriginOffset + m_CurrentRoom * Vector2(m_CameraHorizontalMovement, m_CameraVerticalMovement))
-	m_RespawnPoint = get_global_position()  
 
 func _OnBodyEnteredTop(_body):
 	_UpdateCameraPosition(Vector2.UP)
@@ -39,5 +36,3 @@ func _OnBodyEnteredLeft(_body):
 func _OnBodyEnteredRight(_body):
 	_UpdateCameraPosition(Vector2.RIGHT)
 	
-func respawnPlayer():
-	$Player.set_global_position(m_RespawnPoint)

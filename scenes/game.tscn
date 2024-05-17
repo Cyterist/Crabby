@@ -1,14 +1,18 @@
-[gd_scene load_steps=8 format=3 uid="uid://b3rj8cwn0ikk3"]
+[gd_scene load_steps=10 format=3 uid="uid://b3rj8cwn0ikk3"]
 
-[ext_resource type="PackedScene" uid="uid://bwfyepb4327hl" path="res://scenes/player.tscn" id="1_fgpa2"]
 [ext_resource type="Script" path="res://Scripts/game.gd" id="1_xg3m1"]
 [ext_resource type="PackedScene" uid="uid://bpjsrnbk2gej0" path="res://scenes/areas/area_1.tscn" id="2_j67b7"]
 [ext_resource type="PackedScene" uid="uid://djoy34824jmlj" path="res://scenes/room_transition_camera.tscn" id="2_uu4fi"]
 [ext_resource type="PackedScene" uid="uid://coui5mu86jnwx" path="res://scenes/areas/area2.tscn" id="3_any4w"]
 [ext_resource type="PackedScene" uid="uid://dfhm84a0wafj3" path="res://scenes/killzone.tscn" id="6_b3h8m"]
+[ext_resource type="PackedScene" uid="uid://bb3ntjrebsi02" path="res://scenes/checkpoint.tscn" id="7_dm6w1"]
+[ext_resource type="PackedScene" uid="uid://byhhvp2nbiqkg" path="res://scenes/player_spawner.tscn" id="8_868dt"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xasrl"]
 size = Vector2(1267, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bu4dt"]
+size = Vector2(31, 150)
 
 [node name="Game" type="Node2D"]
 position = Vector2(-2, 0)
@@ -16,7 +20,7 @@ script = ExtResource("1_xg3m1")
 
 [node name="RoomTransitionCamera" parent="." node_paths=PackedStringArray("TargetNode") instance=ExtResource("2_uu4fi")]
 position = Vector2(-31, -31)
-TargetNode = NodePath("../Player")
+TargetNode = NodePath("../Node2D")
 
 [node name="Areas" type="Node" parent="."]
 
@@ -26,8 +30,19 @@ position = Vector2(-2, 0)
 [node name="Area2" parent="Areas" instance=ExtResource("3_any4w")]
 position = Vector2(-2, 0)
 
-[node name="Player" parent="." instance=ExtResource("1_fgpa2")]
-position = Vector2(-12, -24)
+[node name="Checkpoints" type="Node" parent="."]
+
+[node name="checkpoint" parent="Checkpoints" instance=ExtResource("7_dm6w1")]
+position = Vector2(-303, -31)
+
+[node name="checkpoint3" parent="Checkpoints" instance=ExtResource("7_dm6w1")]
+position = Vector2(78, -16)
+
+[node name="checkpoint4" parent="Checkpoints" instance=ExtResource("7_dm6w1")]
+position = Vector2(-482, -187)
+
+[node name="checkpoint2" parent="Checkpoints" instance=ExtResource("7_dm6w1")]
+position = Vector2(-213, -28)
 
 [node name="Pause" type="CanvasLayer" parent="."]
 visible = false
@@ -57,5 +72,13 @@ text = "PAUSED
 [node name="Killzone" parent="." instance=ExtResource("6_b3h8m")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Killzone"]
-position = Vector2(-68, 134)
+position = Vector2(-70, 73)
 shape = SubResource("RectangleShape2D_xasrl")
+
+[node name="Killzone2" parent="." instance=ExtResource("6_b3h8m")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Killzone2"]
+position = Vector2(-530, -46)
+shape = SubResource("RectangleShape2D_bu4dt")
+
+[node name="Node2D" parent="." instance=ExtResource("8_868dt")]
