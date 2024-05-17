@@ -1,0 +1,57 @@
+[gd_scene load_steps=6 format=3 uid="uid://djoy34824jmlj"]
+
+[ext_resource type="Script" path="res://Scripts/RoomTransitionCamera.gd" id="1_kyk3x"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lf2in"]
+size = Vector2(460, 5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xawdp"]
+size = Vector2(460, 5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uui3x"]
+size = Vector2(5, 260)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nmgwb"]
+size = Vector2(5, 260)
+
+[node name="RoomTransitionCamera" type="Camera2D"]
+zoom = Vector2(2.5, 2.5)
+script = ExtResource("1_kyk3x")
+
+[node name="CollisionAreaTop" type="Area2D" parent="."]
+position = Vector2(0, -64)
+collision_layer = 4
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionAreaTop"]
+position = Vector2(0, -63)
+shape = SubResource("RectangleShape2D_lf2in")
+
+[node name="CollisionAreaBottom" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionAreaBottom"]
+position = Vector2(0, 127)
+shape = SubResource("RectangleShape2D_xawdp")
+
+[node name="CollisionAreaLeft" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionAreaLeft"]
+position = Vector2(-228, 0)
+shape = SubResource("RectangleShape2D_uui3x")
+
+[node name="CollisionAreaRight" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionAreaRight"]
+position = Vector2(228, 0)
+shape = SubResource("RectangleShape2D_nmgwb")
+
+[connection signal="body_entered" from="CollisionAreaTop" to="." method="_OnBodyEnteredTop"]
+[connection signal="body_entered" from="CollisionAreaBottom" to="." method="_OnBodyEnteredBottom"]
+[connection signal="body_entered" from="CollisionAreaLeft" to="." method="_OnBodyEnteredLeft"]
+[connection signal="body_entered" from="CollisionAreaRight" to="." method="_OnBodyEnteredRight"]

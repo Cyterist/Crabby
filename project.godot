@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Crabby"
-run/main_scene="res://scenes/test.tscn"
+run/main_scene="res://scenes/game.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -73,6 +73,8 @@ attack={
 2d_physics/layer_1="player"
 2d_physics/layer_2="environment"
 2d_physics/layer_3="enemies"
+2d_physics/layer_4="screen_transition"
+2d_physics/layer_5="camera_boundary"
 
 [rendering]
 

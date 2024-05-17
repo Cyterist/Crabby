@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://bwfyepb4327hl"]
+[gd_scene load_steps=27 format=3 uid="uid://bwfyepb4327hl"]
 
 [ext_resource type="Script" path="res://Scripts/Player.gd" id="1_fml8g"]
 [ext_resource type="Texture2D" uid="uid://bvlselfrm73v0" path="res://Assets/crab/Idle_spritesheet.png" id="2_uo22p"]
@@ -146,32 +146,12 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_supgs"]
 size = Vector2(28.6847, 28.3727)
 
-[sub_resource type="GDScript" id="GDScript_ivxtc"]
-script/source = "extends Node2D
-
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
-"
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bu5km"]
 size = Vector2(12.1542, 20)
 
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 10
 script = ExtResource("1_fml8g")
-
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(1, -13)
-zoom = Vector2(2.5, 2.5)
-limit_bottom = 120
-position_smoothing_enabled = true
 
 [node name="dash_cooldown" parent="." instance=ExtResource("5_e0q1u")]
 unique_name_in_owner = true
@@ -208,7 +188,6 @@ wait_time = 0.15
 one_shot = true
 
 [node name="Bubble" parent="." instance=ExtResource("3_0pc5g")]
-script = SubResource("GDScript_ivxtc")
 
 [node name="attack" type="Area2D" parent="."]
 position = Vector2(0, -16)

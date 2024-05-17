@@ -7,10 +7,9 @@ extends CharacterBody2D
 @onready var dash_cooldown = %dash_cooldown
 @onready var coyote_timer = %CoyoteTimer
 @onready var attack_collision = $attack/CollisionShape2D
-@onready var camera = $Camera2D
 
 const SPEED = 200.0
-const JUMP_VELOCITY = -500.0
+const JUMP_VELOCITY = -490.0
 const SUPER_JUMP_VELOCITY = -700.0
 const DASH_SPEED = 650
 const DASH_COOLDOWN = 3
