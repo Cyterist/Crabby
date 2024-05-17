@@ -57,5 +57,5 @@ text = "PAUSED
 [node name="Killzone" parent="." instance=ExtResource("6_b3h8m")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Killzone"]
-position = Vector2(40, 112)
+position = Vector2(-68, 134)
 shape = SubResource("RectangleShape2D_xasrl")
