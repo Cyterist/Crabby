@@ -150,6 +150,7 @@ size = Vector2(28.6847, 28.3727)
 size = Vector2(12.1542, 20)
 
 [node name="Player" type="CharacterBody2D"]
+z_index = 5
 collision_layer = 10
 script = ExtResource("1_fml8g")
 

@@ -16,11 +16,12 @@ size = Vector2(5, 260)
 
 [node name="RoomTransitionCamera" type="Camera2D"]
 zoom = Vector2(2.5, 2.5)
+position_smoothing_enabled = true
 script = ExtResource("1_kyk3x")
 
 [node name="CollisionAreaTop" type="Area2D" parent="."]
 position = Vector2(0, -64)
-collision_layer = 4
+collision_layer = 8
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionAreaTop"]
@@ -28,7 +29,7 @@ position = Vector2(0, -63)
 shape = SubResource("RectangleShape2D_lf2in")
 
 [node name="CollisionAreaBottom" type="Area2D" parent="."]
-collision_layer = 4
+collision_layer = 8
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionAreaBottom"]
@@ -36,7 +37,7 @@ position = Vector2(0, 127)
 shape = SubResource("RectangleShape2D_xawdp")
 
 [node name="CollisionAreaLeft" type="Area2D" parent="."]
-collision_layer = 4
+collision_layer = 8
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionAreaLeft"]
@@ -44,7 +45,7 @@ position = Vector2(-228, 0)
 shape = SubResource("RectangleShape2D_uui3x")
 
 [node name="CollisionAreaRight" type="Area2D" parent="."]
-collision_layer = 4
+collision_layer = 8
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionAreaRight"]

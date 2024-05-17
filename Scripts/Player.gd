@@ -27,6 +27,10 @@ func _physics_process(delta):
 	# Add the gravity.
 	if not is_on_floor():
 		velocity.y += gravity * delta
+	
+	if is_on_floor():
+		can_act = true
+		
 	if can_act:
 		if Input.is_action_just_pressed("dash") and can_dash:
 				dash = true
@@ -83,6 +87,7 @@ func _physics_process(delta):
 			
 		# Coyote Time
 		var was_on_floor = is_on_floor()
+		var falling = false
 
 		move_and_slide()
 		
