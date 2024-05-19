@@ -3,6 +3,7 @@
 [ext_resource type="Script" path="res://Scripts/checkpoint.gd" id="1_5wpk2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_m03kc"]
+size = Vector2(20, 56)
 
 [node name="checkpoint" type="Area2D"]
 collision_layer = 0

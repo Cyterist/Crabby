@@ -3,16 +3,16 @@
 [ext_resource type="Script" path="res://Scripts/RoomTransitionCamera.gd" id="1_kyk3x"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lf2in"]
-size = Vector2(460, 5)
+size = Vector2(460, 2)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xawdp"]
-size = Vector2(460, 5)
+size = Vector2(460, 2)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uui3x"]
-size = Vector2(5, 260)
+size = Vector2(2, 260)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nmgwb"]
-size = Vector2(5, 260)
+size = Vector2(2, 260)
 
 [node name="RoomTransitionCamera" type="Camera2D"]
 zoom = Vector2(2.5, 2.5)
@@ -25,7 +25,7 @@ collision_layer = 8
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionAreaTop"]
-position = Vector2(0, -63)
+position = Vector2(0, -64.75)
 shape = SubResource("RectangleShape2D_lf2in")
 
 [node name="CollisionAreaBottom" type="Area2D" parent="."]
@@ -33,7 +33,7 @@ collision_layer = 8
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionAreaBottom"]
-position = Vector2(0, 127)
+position = Vector2(0, 128.25)
 shape = SubResource("RectangleShape2D_xawdp")
 
 [node name="CollisionAreaLeft" type="Area2D" parent="."]
@@ -41,7 +41,7 @@ collision_layer = 8
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionAreaLeft"]
-position = Vector2(-228, 0)
+position = Vector2(-229, 0)
 shape = SubResource("RectangleShape2D_uui3x")
 
 [node name="CollisionAreaRight" type="Area2D" parent="."]
@@ -49,7 +49,7 @@ collision_layer = 8
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionAreaRight"]
-position = Vector2(228, 0)
+position = Vector2(229, 0)
 shape = SubResource("RectangleShape2D_nmgwb")
 
 [connection signal="body_entered" from="CollisionAreaTop" to="." method="_OnBodyEnteredTop"]
