@@ -15,7 +15,7 @@ size = Vector2(2, 260)
 size = Vector2(2, 260)
 
 [node name="RoomTransitionCamera" type="Camera2D"]
-zoom = Vector2(2.5, 2.5)
+zoom = Vector2(2.53, 2.53)
 position_smoothing_enabled = true
 script = ExtResource("1_kyk3x")
 

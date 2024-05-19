@@ -8,7 +8,7 @@ const SPEED = 40
 var home_pos = Vector2.ZERO
 var player = null
 var chasing = false
-var health = 50
+var health = 2
 
 func _ready():
 	home_pos = self.global_position
@@ -38,7 +38,8 @@ func _on_path_timer_timeout():
 
 
 func _on_aggro_range_body_entered(body):
-	if body.is_in_group("player"):
+	if body.has_method("isPlayer"):
+		print('detected player')
 		player = body
 		makepath()
 		path_timer.start()
@@ -49,5 +50,7 @@ func _on_aggro_range_body_exited(body):
 	chasing = false
 	
 func take_damage(damage):
-	print("damaged")
+	health -= 1
+	if health >= 0:
+		queue_free()
 
