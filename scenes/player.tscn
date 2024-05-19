@@ -1,8 +1,7 @@
-[gd_scene load_steps=29 format=3 uid="uid://bwfyepb4327hl"]
+[gd_scene load_steps=28 format=3 uid="uid://bwfyepb4327hl"]
 
 [ext_resource type="Script" path="res://Scripts/Player.gd" id="1_fml8g"]
 [ext_resource type="Texture2D" uid="uid://bvlselfrm73v0" path="res://Assets/crab/Idle_spritesheet.png" id="2_uo22p"]
-[ext_resource type="PackedScene" uid="uid://cwu5jorjtuluk" path="res://scenes/ParticleEffects/bubble.tscn" id="3_0pc5g"]
 [ext_resource type="Texture2D" uid="uid://h4r525a4xa0o" path="res://Assets/crab/Attack_spritesheet.png" id="3_pr7yw"]
 [ext_resource type="Texture2D" uid="uid://ccx2gmyyvj2rq" path="res://Assets/crab/Jump_spritesheet.png" id="3_qxr0g"]
 [ext_resource type="Texture2D" uid="uid://rmamq0dli23g" path="res://Assets/crab/Dash_spritesheet.png" id="4_m1aoh"]
@@ -200,8 +199,6 @@ wait_time = 3.0
 unique_name_in_owner = true
 wait_time = 0.15
 one_shot = true
-
-[node name="Bubble" parent="." instance=ExtResource("3_0pc5g")]
 
 [node name="attack" type="Area2D" parent="."]
 position = Vector2(0, -16)

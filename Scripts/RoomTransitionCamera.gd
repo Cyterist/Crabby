@@ -2,7 +2,7 @@ extends Camera2D
 class_name RoomTransitionCamera
 
 const HORIZONAL_OFFSET : int = 733
-const VERTICAL_OFFSET : int = 397
+const VERTICAL_OFFSET : int = 410
 
 #Target node the camera will be tracking
 @export var TargetNode : Node2D = null

@@ -9,8 +9,8 @@ var spawner = null
 @onready var coyote_timer = %CoyoteTimer
 @onready var attack_collision = $attack/CollisionShape2D
 
-const SPEED = 200.0
-const JUMP_VELOCITY = -490.0
+const SPEED = 175.0
+const JUMP_VELOCITY = -4900.0
 const SUPER_JUMP_VELOCITY = -700.0
 const DASH_SPEED = 700
 const DASH_COOLDOWN = 3
@@ -60,8 +60,8 @@ func _physics_process(delta):
 			velocity.x = move_toward(velocity.x, 0, SPEED)
 		
 		
-		if Input.is_action_just_pressed("super_jump") and is_on_floor() and direction == 0:
-			velocity.y = SUPER_JUMP_VELOCITY
+		#if Input.is_action_just_pressed("super_jump") and is_on_floor() and direction == 0:
+			#velocity.y = SUPER_JUMP_VELOCITY
 		
 			# Flip the sprite
 		if direction > 0:
