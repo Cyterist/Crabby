@@ -1,10 +1,14 @@
-[gd_scene load_steps=6 format=3 uid="uid://b3rj8cwn0ikk3"]
+[gd_scene load_steps=8 format=3 uid="uid://b3rj8cwn0ikk3"]
 
 [ext_resource type="Script" path="res://Scripts/game.gd" id="1_xg3m1"]
 [ext_resource type="PackedScene" uid="uid://djoy34824jmlj" path="res://scenes/room_transition_camera.tscn" id="2_uu4fi"]
 [ext_resource type="PackedScene" uid="uid://coui5mu86jnwx" path="res://scenes/areas/area1.tscn" id="3_lgq6i"]
+[ext_resource type="PackedScene" uid="uid://tbqhranix4j1" path="res://scenes/victory.tscn" id="5_3ctjo"]
 [ext_resource type="PackedScene" uid="uid://cp5m68gtxbjdj" path="res://scenes/enemy.tscn" id="5_237mo"]
 [ext_resource type="PackedScene" uid="uid://byhhvp2nbiqkg" path="res://scenes/player_spawner.tscn" id="8_868dt"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_dvelm"]
+font_size = 250
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_xg3m1")
@@ -48,3 +52,23 @@ text = "PAUSED
 
 [node name="enemy" parent="." instance=ExtResource("5_237mo")]
 position = Vector2(143, -50)
+
+[node name="victory" parent="." instance=ExtResource("5_3ctjo")]
+position = Vector2(501, -855)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="victory"]
+visible = false
+
+[node name="ColorRect" type="ColorRect" parent="victory/CanvasLayer"]
+offset_right = 1152.0
+offset_bottom = 647.0
+color = Color(0.106747, 0.77173, 0.70232, 1)
+
+[node name="Label" type="Label" parent="victory/CanvasLayer/ColorRect"]
+layout_mode = 0
+offset_left = 61.0
+offset_top = 127.0
+offset_right = 1088.0
+offset_bottom = 469.0
+text = "You win!"
+label_settings = SubResource("LabelSettings_dvelm")

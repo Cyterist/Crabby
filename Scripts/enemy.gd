@@ -27,7 +27,9 @@ func _physics_process(_delta):
 	move_and_slide()
 
 func makepath():
+	print('makepath entered')
 	if player:
+		print('pathing')
 		nav_agent.target_position = player.global_position
 	else:
 		nav_agent.target_position = home_pos

@@ -10,7 +10,7 @@ var spawner = null
 @onready var attack_collision = $attack/CollisionShape2D
 
 const SPEED = 175.0
-const JUMP_VELOCITY = -4900.0
+const JUMP_VELOCITY = -890.0
 const SUPER_JUMP_VELOCITY = -700.0
 const DASH_SPEED = 700
 const DASH_COOLDOWN = 3
