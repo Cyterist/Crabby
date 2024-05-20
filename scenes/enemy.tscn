@@ -40,14 +40,14 @@ radius = 105.0
 
 [node name="enemy" type="CharacterBody2D"]
 collision_layer = 4
-collision_mask = 3
+collision_mask = 0
 motion_mode = 1
 wall_min_slide_angle = 0.0
 script = ExtResource("1_061td")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_w4lmo")
-frame_progress = 0.538903
+frame_progress = 0.289241
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_2kjny")
@@ -56,10 +56,11 @@ shape = SubResource("CircleShape2D_2kjny")
 debug_enabled = true
 
 [node name="Path_timer" type="Timer" parent="."]
-wait_time = 0.5
+wait_time = 0.1
 
 [node name="aggro_range" type="Area2D" parent="."]
-collision_mask = 2
+collision_layer = 0
+collision_mask = 15
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="aggro_range"]
 shape = SubResource("CircleShape2D_3ries")

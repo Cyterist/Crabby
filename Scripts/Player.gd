@@ -10,7 +10,7 @@ var spawner = null
 @onready var attack_collision = $attack/CollisionShape2D
 
 const SPEED = 175.0
-const JUMP_VELOCITY = -890.0
+const JUMP_VELOCITY = -490.0
 const SUPER_JUMP_VELOCITY = -700.0
 const DASH_SPEED = 700
 const DASH_COOLDOWN = 3
@@ -88,7 +88,6 @@ func _physics_process(delta):
 			
 		# Coyote Time
 		var was_on_floor = is_on_floor()
-		var falling = false
 
 		move_and_slide()
 		

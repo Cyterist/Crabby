@@ -5,7 +5,7 @@ var paused = false
 @onready var pause = $Pause
 
 
-func _process(delta):
+func _process(_delta):
 	if Input.is_action_just_pressed("pause"):
 		if paused:
 			paused = false

@@ -1,10 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://b3rj8cwn0ikk3"]
+[gd_scene load_steps=7 format=3 uid="uid://b3rj8cwn0ikk3"]
 
 [ext_resource type="Script" path="res://Scripts/game.gd" id="1_xg3m1"]
 [ext_resource type="PackedScene" uid="uid://djoy34824jmlj" path="res://scenes/room_transition_camera.tscn" id="2_uu4fi"]
 [ext_resource type="PackedScene" uid="uid://coui5mu86jnwx" path="res://scenes/areas/area1.tscn" id="3_lgq6i"]
 [ext_resource type="PackedScene" uid="uid://tbqhranix4j1" path="res://scenes/victory.tscn" id="5_3ctjo"]
-[ext_resource type="PackedScene" uid="uid://cp5m68gtxbjdj" path="res://scenes/enemy.tscn" id="5_237mo"]
 [ext_resource type="PackedScene" uid="uid://byhhvp2nbiqkg" path="res://scenes/player_spawner.tscn" id="8_868dt"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_dvelm"]
@@ -49,9 +48,6 @@ grow_vertical = 2
 theme_override_font_sizes/font_size = 72
 text = "PAUSED
 "
-
-[node name="enemy" parent="." instance=ExtResource("5_237mo")]
-position = Vector2(143, -50)
 
 [node name="victory" parent="." instance=ExtResource("5_3ctjo")]
 position = Vector2(501, -855)
